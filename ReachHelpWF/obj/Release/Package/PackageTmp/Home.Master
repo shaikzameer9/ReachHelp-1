@@ -1,0 +1,1202 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Home.master.cs" Inherits="ReachHelpWF.Home" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head id="Head1" runat="server">
+    <meta charset="utf-8">
+    <title>ReacHelp</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //for-mobile-apps -->
+    <link href="lib/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="lib/w3layout/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- font-awesome icons -->
+    <link href="lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <!-- //font-awesome icons -->
+    <link href="lib/animate/animate.css" rel="stylesheet" />
+    <!-- iCheck -->
+    <link href="main/vendors/iCheck/skins/flat/green.css" rel="stylesheet" />
+    <%--<link href="lib/spzoom/jquery.spzoom.css" rel="stylesheet" />--%>
+
+
+    <!-- intlTellInput -->
+    <%--<link href="../lib/intl-codes/css/intlTelInput.min.css" rel="stylesheet" />--%>
+
+    <!-- js -->
+    <script src="lib/jquery/jquery.min.js"></script>
+    <!-- //js -->
+    <link href='//fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    <%--<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">--%>
+    <%--<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700,700i" rel="stylesheet">--%>
+    <style>
+        .prettyline {
+            height: 5px;
+            border-top: 0;
+            background: #c4e17f;
+            border-radius: 5px;
+            background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+            background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+            background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+            background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        }
+
+        .dropdown-submenu {
+            position: relative;
+        }
+
+            .dropdown-submenu .dropdown-menu {
+                top: 0;
+                left: 100%;
+                margin-top: -1px;
+            }
+
+        .offerCard {
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        .btn-rounded {
+            border-radius: 30px !important;
+        }
+
+        .btn-green {
+            background: #4caf50 !important;
+        }
+
+        .btn-outline {
+            background: transparent;
+            transition: background .5s, transform .5s;
+        }
+
+        .dark {
+            border-color: #000 !important;
+            color: #000;
+        }
+
+        .light {
+            border-color: #fff !important;
+            color: #fff;
+        }
+
+        .btn-outline:hover {
+            background-color: #000 !important;
+            color: #fff !important;
+            transform: scale(0.9); /*scale(1.2);*/
+        }
+
+        .sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+            .sticky + .content {
+                padding-top: 60px;
+            }
+
+        .loader-cont {
+            position: fixed;
+            display: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0,0.8);
+        }
+
+            .loader-cont span {
+                position: absolute;
+                top: 50%;
+                left: 48%;
+                background-color: transparent;
+                color: #fff;
+            }
+
+            .loader-cont .loader {
+                position: relative;
+                top: calc(50% - 50px);
+                left: calc(50% - 50px);
+                border: 16px solid #f3f3f3;
+                border-radius: 50%;
+                border-top: 16px solid #f05f6b; /*#3498db;*/
+                width: 120px;
+                height: 120px;
+                -webkit-animation: spin 2s linear infinite; /* Safari */
+                animation: spin 2s linear infinite;
+            }
+
+        /* Safari */
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+
+        /* Donation CSS >>> */
+        #donation {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+            #donation .donation-amt {
+                color: #fff;
+                border: 1px solid #fff;
+                border-radius: 4px;
+                flex-basis: 33%;
+                text-align: center;
+                line-height: 3rem;
+                margin: 3px auto;
+                height: 50px;
+                box-sizing: border-box;
+                transition: background .5s, transform .5s;
+            }
+
+                #donation .donation-amt:hover {
+                    transform: scale(0.95);
+                    cursor: pointer;
+                }
+
+                #donation .donation-amt.active {
+                    transform: scale(0.95);
+                    background: #101010;
+                    font-weight: bold;
+                    color: #ff9b05;
+                    border-color: #ff9b05;
+                }
+
+                #donation .donation-amt.other {
+                    display: flex;
+                    flex-direction: column;
+                    padding: 0 10px;
+                }
+
+                    #donation .donation-amt.other input {
+                        width: 100%;
+                        height: 25px;
+                        border: 1px solid #373737;
+                        border-radius: 3px;
+                        box-sizing: border-box;
+                    }
+
+                        #donation .donation-amt.other input[type=number]::-webkit-inner-spin-button,
+                        #donation .donation-amt.other input[type=number]::-webkit-outer-spin-button {
+                            -webkit-appearance: none;
+                            margin: 0;
+                        }
+
+            #donation h4 {
+                flex-basis: 100%;
+                margin: 5px auto;
+                text-align: center;
+            }
+
+        #btnDonate {
+            background: none;
+            border: none;
+            font-weight: bold;
+            transition: .5s ease-in;
+            padding: 0;
+            margin: 0 0 0 -4px;
+        }
+
+            #btnDonate:hover {
+                color: #fe9126;
+            }
+
+        .hide {
+            display: none;
+        }
+
+        .termsAndConditionsCont {
+            padding: 10px;
+            height: 300px;
+            overflow-y: auto;
+        }
+
+            .termsAndConditionsCont:after {
+                content: "";
+                display: block;
+                height: 50px;
+                width: 100%;
+            }
+
+            .termsAndConditionsCont strong, .termsAndConditionsCont li {
+                font-size: small;
+            }
+
+            .termsAndConditionsCont p {
+                margin: 10px 0;
+                font-size: small;
+            }
+
+        /* <<< Donation CSS */
+    </style>
+    <!-- start-smoth-scrolling -->
+    <script src="lib/w3layout/js/move-top.js"></script>
+    <script src="lib/w3layout/js/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+            });
+
+            $(document).ajaxStart(function () {
+                $('.loader-cont').show();
+            }).ajaxStop(function () {
+                $('.loader-cont').hide();
+            });
+
+        });
+    </script>
+    <!-- start-smoth-scrolling -->
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+
+<body data-spy="scroll" data-target="#navbar-example">
+    <form id="form1" runat="server">
+        <!-- header -->
+        <div class="agileits_header">
+            <div class="container">
+                <div class="w3l_offers">
+                    <!--<p>SALE UP TO 70% OFF. USE CODE "SALE70%" . <a href="products.html">SHOP NOW</a></p>-->
+                    <%--<h3 style="color: #fe9126">ReacHelp</h3>--%>
+                    <a href="/index.aspx" class="site_title">
+                        <img src="main/images/reachHelpLogo.png" style="width: 50px; position: absolute; top: 5px; left: 50px;">
+                        <h2 style="color: #fff; font-family: 'Montserrat', sans-serif;">ReacHelp</h2>
+                    </a>
+                </div>
+                <%--<button type="button" class="btn btn-danger btn-sm pull-right" style="float: right; margin-top: 5px;">Donate</button>--%>
+                <div class="agile-login pull-right">
+                    <ul style="float: right;">
+                        <% if (HttpContext.Current.Session["UserName"] == null)
+                           { %>
+                        <li id="register"><a href="#">Create Account </a></li>
+                        <li id="lmodalid"><a href="#">Login</a></li>
+                        <%}%>
+                        <%else
+                           {%>
+                        <li><a href="./main/index.aspx">My Account</a></li>
+                        <%}%>
+                        <%--<li id="register"><a href="#">Create Account </a></li>
+                        <li id="lmodalid"><a href="#">Login</a></li>--%>
+                        <%--<li><a href="#">Help</a></li>--%>
+                    </ul>
+                </div>
+                <!--<div class="product_list_header">
+                <form action="#" method="post" class="last">
+                    <input type="hidden" name="cmd" value="_cart">
+                    <input type="hidden" name="display" value="1">
+                    <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+                </form>
+            </div>-->
+                <!--<div class="clearfix"></div>-->
+            </div>
+        </div>
+
+        <!--<div class="logo_products">
+        <div class="container">
+            <div class="w3ls_logo_products_left1">
+                <ul class="phone_email">
+                    <li><i class="fa fa-phone" aria-hidden="true"></i>Order online or call us : (+0123) 234 567</li>
+
+                </ul>
+            </div>
+            <div class="w3ls_logo_products_left">
+                <h1><a href="index.html">ReacHelp</a></h1>
+            </div>
+            <div class="w3l_search">
+                <form action="#" method="post">
+                    <input type="search" name="Search" placeholder="Search for a Product..." required="">
+                    <button type="submit" class="btn btn-default search" aria-label="Left Align">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>-->
+        <!-- //header -->
+
+
+        <% if (HttpContext.Current.Session["UserName"] == null)
+           {%>
+        <script>
+            sessionStorage.clear();
+        </script>
+        <%} %>
+
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+        <!-- Modal For Login/signup-->
+        <div id="loginorsignup" class="modal fade" role="dialog" data-backdrop="static">
+            <div class="modal-dialog modal-sm" id="setmodalsize">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #333333">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" style="color: #fff; font-size: 16px; text-align: center; font-weight: 600;" id="modaltitle">LOGIN/SIGNUP</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="tab" role="tabpanel">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#login" role="tab" data-toggle="tab"><span><i class="fa fa-user"></i></span>Login</a></li>
+                                <li role="presentation"><a href="#signup" role="tab" data-toggle="tab"><span><i class="fa fa-edit"></i></span>Sign up</a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content tabs">
+                                <div role="tabpanel" class="tab-pane fade in active" id="login">
+                                    <asp:Panel ID="Panel1" runat="server" DefaultButton="loginbtn">
+                                        <asp:UpdatePanel ID="Loginpanel" runat="server">
+                                            <ContentTemplate>
+                                                <div class="form-group" style="margin-top: 15px; margin-bottom: 1px">
+                                                    <label for="mobileno">Email / Cell No.</label>
+                                                    <asp:TextBox ID="mobileno" runat="server" CssClass="form-control" ValidationGroup="login"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
+                                                        ControlToValidate="mobileno" ErrorMessage="Email / Cell No. is Required"
+                                                        Font-Bold="false" Font-Size="small" ForeColor="#FF3300" ValidationGroup="login"></asp:RequiredFieldValidator>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom: 1px">
+                                                    <label for="password">Password</label>
+                                                    <asp:TextBox ID="password" runat="server" TextMode="Password" CssClass="form-control" ValidationGroup="login"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+                                                        ControlToValidate="password" ErrorMessage="Password is Required"
+                                                        Font-Bold="false" Font-Size="small" ForeColor="#FF3300" ValidationGroup="login"></asp:RequiredFieldValidator>
+                                                </div>
+                                                <div class="form-group">
+                                                    <a class="pull-right" style="margin-bottom: 5px" href="#forgotpass" role="tab" data-toggle="tab">Forgot Password?</a>
+                                                </div>
+                                                <div class="form-group">
+                                                    <asp:Button CssClass="btn btn-success btn-block" ID="loginbtn" runat="server" OnClick="login_Click" Text="Login" ValidationGroup="login" />
+                                                </div>
+                                                <asp:Label ID="validation" runat="server" Text=""></asp:Label>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </asp:Panel>
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="signup">
+                                    <asp:Panel ID="Panel2" runat="server" DefaultButton="signupbtn">
+                                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                            <ContentTemplate>
+
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group" style="margin-bottom: 1px">
+                                                            <label for="sname">First Name <span style="color: red">*</span></label>
+                                                            <asp:TextBox ID="sname" runat="server" CssClass="form-control" ValidationGroup="signupgp"></asp:TextBox>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
+                                                                ControlToValidate="sname" ErrorMessage="Firstname is Required"
+                                                                Font-Bold="false" Font-Size="small" ForeColor="#FF3300" ValidationGroup="signupgp"></asp:RequiredFieldValidator>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <div class="form-group" style="margin-bottom: 1px">
+                                                            <label for="mname">Middle Name</label>
+                                                            <asp:TextBox ID="mname" runat="server" CssClass="form-control" ValidationGroup="signupgp"></asp:TextBox>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group" style="margin-bottom: 1px">
+                                                            <label for="lname">Last Name <span style="color: red">*</span></label>
+                                                            <asp:TextBox ID="lname" runat="server" CssClass="form-control" ValidationGroup="signupgp"></asp:TextBox>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"
+                                                                ControlToValidate="lname" ErrorMessage="Lastname is Required"
+                                                                Font-Bold="false" Font-Size="small" ForeColor="#FF3300" ValidationGroup="signupgp"></asp:RequiredFieldValidator>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group" style="margin-bottom: 1px">
+                                                            <label for="sphoneno">Cell Number <span style="color: red">*</span></label>
+                                                            <asp:TextBox ID="sphoneno" runat="server" CssClass="form-control" AutoPostBack="True" OnDataBinding="check_mobile_Changed" OnTextChanged="check_mobile_Changed" ValidationGroup="signupgp"></asp:TextBox>
+                                                            <asp:Label ID="sphonenocheck" runat="server" Text=""></asp:Label>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server"
+                                                                ControlToValidate="sphoneno" ErrorMessage="Cell no. is Required"
+                                                                Font-Bold="false" Font-Size="small" ForeColor="#FF3300" ValidationGroup="signupgp"></asp:RequiredFieldValidator>
+                                                            <input type="hidden" runat="server" id="countryCode" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group" style="margin-bottom: 1px">
+                                                            <label for="semailid">Email Id <span style="color: red">*</span></label>
+                                                            <asp:TextBox ID="semailid" runat="server" CssClass="form-control" AutoPostBack="True" OnDataBinding="check_email_Changed" OnTextChanged="check_email_Changed" ValidationGroup="signupgp"></asp:TextBox>
+                                                            <asp:Label ID="semailidlable" runat="server" Text=""></asp:Label>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server"
+                                                                ControlToValidate="semailid" ErrorMessage="Email Id is Required"
+                                                                Font-Bold="false" Font-Size="small" ForeColor="#FF3300" ValidationGroup="signupgp"></asp:RequiredFieldValidator>
+                                                        </div>
+                                                    </div>
+                                                    <%--<div class="col-md-6">
+                                            <div class="form-group" style="margin-bottom:1px">
+                                                <label for="supassword">Password <span style="color:red">*</span></label>
+                                                <asp:TextBox ID="supassword" runat="server" TextMode="Password" CssClass="form-control" ValidationGroup="signupgp"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"
+                                                        ControlToValidate="supassword" ErrorMessage="Password is Required"
+                                                        Font-Bold="false" Font-Size="small" ForeColor="#FF3300" ValidationGroup="signupgp"></asp:RequiredFieldValidator>
+                                            </div>
+                                        </div>--%>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group" style="margin-bottom: 1px">
+                                                            <label for="sentityname">Entity Name <small>(optional)</small></label>
+                                                            <asp:TextBox ID="sentityname" runat="server" CssClass="form-control" ValidationGroup="signupgp"></asp:TextBox>
+                                                            <i class="form-text" style="font-size: 9pt"><span style="color: crimson; font-weight: bold;">Note: </span>Enter if you are registering on behalf of an organization or other entity</i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group" style="margin-bottom: 1px">
+                                                            <label for="sdesignation">Designation <small>(optional)</small></label>
+                                                            <asp:TextBox ID="sdesignation" runat="server" CssClass="form-control" ValidationGroup="signupgp"></asp:TextBox>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <%--<div class="col-md-12">
+                                                        <div class="form-group" style="margin-bottom: 1px">
+                                                            <label for="saddress">Address <span style="color: red">*</span></label>
+                                                            <asp:TextBox ID="saddress" runat="server" CssClass="form-control" ValidationGroup="signupgp" TextMode="multiline" Rows="5"></asp:TextBox>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server"
+                                                                ControlToValidate="saddress" ErrorMessage="Address is Required"
+                                                                Font-Bold="false" Font-Size="small" ForeColor="#FF3300" ValidationGroup="signupgp"></asp:RequiredFieldValidator>
+                                                        </div>
+                                                    </div>--%>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group" style="margin-bottom: 1px">
+                                                            <label for="sstreet1">Street address 1 <span style="color: red">*</span></label>
+                                                            <asp:TextBox ID="sstreet1" runat="server" CssClass="form-control" ValidationGroup="signupgp"></asp:TextBox>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server"
+                                                                ControlToValidate="sstreet1" ErrorMessage="Street Address 1 is Required"
+                                                                Font-Bold="false" Font-Size="small" ForeColor="#FF3300" ValidationGroup="signupgp"></asp:RequiredFieldValidator>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group" style="margin-bottom: 1px">
+                                                            <label for="sstreet2">Street address 2 <small style="color: #a0a0a0; font-weight: 400;">(optional)</small> </label>
+                                                            <asp:TextBox ID="sstreet2" runat="server" CssClass="form-control" ValidationGroup="signupgp"></asp:TextBox>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group" style="margin-bottom: 1px">
+                                                            <label for="scountry">Country <span style="color: red">*</span></label>
+                                                            <asp:DropDownList ID="scountry" runat="server" CssClass="form-control" ValidationGroup="signupgp" AutoPostBack="true" AppendDataBoundItems="true" OnSelectedIndexChanged="scountry_SelectedIndexChanged"></asp:DropDownList>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server"
+                                                                ControlToValidate="scountry" ErrorMessage="Country is Required"
+                                                                Font-Bold="false" Font-Size="small" ForeColor="#FF3300" ValidationGroup="signupgp"></asp:RequiredFieldValidator>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group" style="margin-bottom: 1px">
+                                                            <label for="sstate">State <span style="color: red">*</span></label>
+                                                            <asp:DropDownList ID="sstate" runat="server" CssClass="form-control" ValidationGroup="signupgp" AutoPostBack="true" AppendDataBoundItems="true" OnSelectedIndexChanged="sstate_SelectedIndexChanged"></asp:DropDownList>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server"
+                                                                ControlToValidate="sstate" ErrorMessage="State is Required"
+                                                                Font-Bold="false" Font-Size="small" ForeColor="#FF3300" ValidationGroup="signupgp"></asp:RequiredFieldValidator>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group" style="margin-bottom: 1px">
+                                                            <label for="scity">City <span style="color: red">*</span></label>
+                                                            <asp:TextBox ID="scity" runat="server" CssClass="form-control" ValidationGroup="signupgp" AppendDataBoundItems="true"></asp:TextBox>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server"
+                                                                ControlToValidate="scity" ErrorMessage="City is Required"
+                                                                Font-Bold="false" Font-Size="small" ForeColor="#FF3300" ValidationGroup="signupgp"></asp:RequiredFieldValidator>
+                                                        </div>
+                                                    </div>
+                                                    <%--<div class="col-md-4">
+                                                        <div class="form-group" style="margin-bottom: 1px">
+                                                            <label for="scity">City <span style="color: red">*</span></label>
+                                                            <asp:DropDownList ID="scity" runat="server" CssClass="form-control" ValidationGroup="signupgp" AppendDataBoundItems="true"></asp:DropDownList>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server"
+                                                                ControlToValidate="scity" ErrorMessage="City is Required"
+                                                                Font-Bold="false" Font-Size="small" ForeColor="#FF3300" ValidationGroup="signupgp"></asp:RequiredFieldValidator>
+                                                        </div>
+                                                    </div>--%>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group" style="margin-bottom: 1px">
+                                                            <label for="spincode">Zipcode <span style="color: red">*</span></label>
+                                                            <asp:TextBox ID="spincode" runat="server" CssClass="form-control" TextMode="Number" MaxLength="6" MinLength="5" ValidationGroup="signupgp"></asp:TextBox>
+                                                            <asp:RegularExpressionValidator ID="RequiredFieldValidator5" runat="server"
+                                                                ControlToValidate="spincode" ErrorMessage="Zipcode must be 5 to 6 digits"
+                                                                ValidationExpression="^[0-9]{5,6}$"
+                                                                SetFocusOnError="True"
+                                                                Font-Bold="false" Font-Size="small" ForeColor="#FF3300" ValidationGroup="signupgp"></asp:RegularExpressionValidator>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server"
+                                                                ControlToValidate="spincode" ErrorMessage="Zipcode is Required"
+                                                                SetFocusOnError="True"
+                                                                Font-Bold="false" Font-Size="small" ForeColor="#FF3300" ValidationGroup="signupgp"></asp:RequiredFieldValidator>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <h5>Terms and Conditions</h5>
+                                                        <div class="termsAndConditionsCont">
+                                                            <strong>Welcome to ReacHelp!</strong>
+
+                                                            <p>These terms and conditions outline the rules and regulations for the use of Applied Cognition Systems Pvt. Ltd.'s Website, located at reachelp.org.</p>
+
+                                                            <p>By accessing this website we assume you accept these terms and conditions. Do not continue to use ReacHelp if you do not agree to take all of the terms and conditions stated on this page. Our Terms and Conditions were created with the help of the Terms And Conditions Generator and the Privacy Policy Template.</p>
+
+                                                            <p>The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and all Agreements: "Client", "You" and "Your" refers to you, the person log on this website and compliant to the Company’s terms and conditions. "The Company", "Ourselves", "We", "Our" and "Us", refers to our Company. "Party", "Parties", or "Us", refers to both the Client and ourselves. All terms refer to the offer, acceptance and consideration of payment necessary to undertake the process of our assistance to the Client in the most appropriate manner for the express purpose of meeting the Client’s needs in respect of provision of the Company’s stated services, in accordance with and subject to, prevailing law of Netherlands. Any use of the above terminology or other words in the singular, plural, capitalization and/or he/she or they, are taken as interchangeable and therefore as referring to same.</p>
+
+                                                            <strong>Cookies</strong>
+                                                            <p>We employ the use of cookies. By accessing ReacHelp, you agreed to use cookies in agreement with the Applied Cognition Systems Pvt. Ltd.'s Privacy Policy.</p>
+
+                                                            <p>Most interactive websites use cookies to let us retrieve the user’s details for each visit. Cookies are used by our website to enable the functionality of certain areas to make it easier for people visiting our website. Some of our affiliate/advertising partners may also use cookies.</p>
+
+                                                            <strong>License</strong>
+                                                            <p>Unless otherwise stated, Applied Cognition Systems Pvt. Ltd. and/or its licensors own the intellectual property rights for all material on ReacHelp. All intellectual property rights are reserved. You may access this from ReacHelp for your own personal use subjected to restrictions set in these terms and conditions.</p>
+
+                                                            <p>You must not:</p>
+
+                                                            <ol>
+                                                                <li>Republish material from ReacHelp</li>
+                                                                <li>Sell, rent or sub-license material from ReacHelp</li>
+                                                                <li>Reproduce, duplicate or copy material from ReacHelp</li>
+                                                                <li>Redistribute content from ReacHelp</li>
+                                                                <li>This Agreement shall begin on the date hereof.</li>
+                                                            </ol>
+
+                                                            <p>Parts of this website offer an opportunity for users to post and exchange opinions and information in certain areas of the website. Applied Cognition Systems Pvt. Ltd. does not filter, edit, publish or review Comments prior to their presence on the website. Comments do not reflect the views and opinions of Applied Cognition Systems Pvt. Ltd.,its agents and/or affiliates. Comments reflect the views and opinions of the person who post their views and opinions. To the extent permitted by applicable laws, Applied Cognition Systems Pvt. Ltd. shall not be liable for the Comments or for any liability, damages or expenses caused and/or suffered as a result of any use of and/or posting of and/or appearance of the Comments on this website.</p>
+
+                                                            <p>Applied Cognition Systems Pvt. Ltd. reserves the right to monitor all Comments and to remove any Comments which can be considered inappropriate, offensive or causes breach of these Terms and Conditions.</p>
+
+                                                            <p>You warrant and represent that:</p>
+
+                                                            <ol>
+                                                                <li>You are entitled to post the Comments on our website and have all necessary licenses and consents to do so;</li>
+                                                                <li>The Comments do not invade any intellectual property right, including without limitation copyright, patent or trademark of any third party;</li>
+                                                                <li>The Comments do not contain any defamatory, libelous, offensive, indecent or otherwise unlawful material which is an invasion of privacy</li>
+                                                                <li>The Comments will not be used to solicit or promote business or custom or present commercial activities or unlawful activity.
+You hereby grant Applied Cognition Systems Pvt. Ltd. a non-exclusive license to use, reproduce, edit and authorize others to use, reproduce and edit any of your Comments in any and all forms, formats or media.</li>
+                                                            </ol>
+
+
+
+                                                            <strong>Hyperlinking to our Content</strong>
+                                                            <p>The following organizations may link to our Website without prior written approval:</p>
+
+                                                            <ul>
+                                                                <li>Government agencies;</li>
+                                                                <li>Search engines;</li>
+                                                                <li>News organizations;</li>
+                                                                <li>Online directory distributors may link to our Website in the same manner as they hyperlink to the Websites of other listed businesses; and</li>
+                                                                <li>System wide Accredited Businesses except soliciting non-profit organizations, charity shopping malls, and charity fundraising groups which may not hyperlink to our Web site.</li>
+                                                            </ul>
+
+                                                            <p>These organizations may link to our home page, to publications or to other Website information so long as the link: (a) is not in any way deceptive; (b) does not falsely imply sponsorship, endorsement or approval of the linking party and its products and/or services; and (c) fits within the context of the linking party’s site.</p>
+
+                                                            <p>We may consider and approve other link requests from the following types of organizations:</p>
+
+                                                            <ul>
+                                                                <li>commonly-known consumer and/or business information sources;</li>
+                                                                <li>dot.com community sites;</li>
+                                                                <li>associations or other groups representing charities;</li>
+                                                                <li>online directory distributors;</li>
+                                                                <li>internet portals;</li>
+                                                                <li>accounting, law and consulting firms; and</li>
+                                                                <li>educational institutions and trade associations.</li>
+                                                            </ul>
+
+                                                            <p>We will approve link requests from these organizations if we decide that: (a) the link would not make us look unfavorably to ourselves or to our accredited businesses; (b) the organization does not have any negative records with us; (c) the benefit to us from the visibility of the hyperlink compensates the absence of Applied Cognition Systems Pvt. Ltd.; and (d) the link is in the context of general resource information.</p>
+
+                                                            <p>These organizations may link to our home page so long as the link: (a) is not in any way deceptive; (b) does not falsely imply sponsorship, endorsement or approval of the linking party and its products or services; and (c) fits within the context of the linking party’s site.</p>
+
+                                                            <p>If you are one of the organizations listed in paragraph 2 above and are interested in linking to our website, you must inform us by sending an e-mail to Applied Cognition Systems Pvt. Ltd.. Please include your name, your organization name, contact information as well as the URL of your site, a list of any URLs from which you intend to link to our Website, and a list of the URLs on our site to which you would like to link. Wait 2-3 weeks for a response.</p>
+
+                                                            <p>Approved organizations may hyperlink to our Website as follows:</p>
+
+                                                            <ul>
+                                                                <li>By use of our corporate name; or</li>
+                                                                <li>By use of the uniform resource locator being linked to; or</li>
+                                                                <li>By use of any other description of our Website being linked to that makes sense within the context and format of content on the linking party’s site.</li>
+                                                            </ul>
+
+                                                            <p>No use of Applied Cognition Systems Pvt. Ltd.'s logo or other artwork will be allowed for linking absent a trademark license agreement.</p>
+
+                                                            <strong>iFrames</strong>
+                                                            <p>Without prior approval and written permission, you may not create frames around our Webpages that alter in any way the visual presentation or appearance of our Website.</p>
+
+                                                            <strong>Content Liability</strong>
+                                                            <p>We shall not be hold responsible for any content that appears on your Website. You agree to protect and defend us against all claims that is rising on your Website. No link(s) should appear on any Website that may be interpreted as libelous, obscene or criminal, or which infringes, otherwise violates, or advocates the infringement or other violation of, any third party rights.</p>
+
+                                                            <strong>Your Privacy</strong>
+                                                            <p>Please read <a href="privacy.aspx">Privacy Policy</a></p>
+
+                                                            <strong>Reservation of Rights</strong>
+                                                            <p>We reserve the right to request that you remove all links or any particular link to our Website. You approve to immediately remove all links to our Website upon request. We also reserve the right to amen these terms and conditions and it’s linking policy at any time. By continuously linking to our Website, you agree to be bound to and follow these linking terms and conditions.</p>
+
+                                                            <strong>Removal of links from our website</strong>
+                                                            <p>If you find any link on our Website that is offensive for any reason, you are free to contact and inform us any moment. We will consider requests to remove links but we are not obligated to or so or to respond to you directly.</p>
+
+                                                            <p>We do not ensure that the information on this website is correct, we do not warrant its completeness or accuracy; nor do we promise to ensure that the website remains available or that the material on the website is kept up to date.</p>
+
+                                                            <strong>Disclaimer</strong>
+                                                            <p>To the maximum extent permitted by applicable law, we exclude all representations, warranties and conditions relating to our website and the use of this website. Nothing in this disclaimer will:</p>
+
+                                                            <ul>
+                                                                <li>limit or exclude our or your liability for death or personal injury;</li>
+                                                                <li>limit or exclude our or your liability for fraud or fraudulent misrepresentation;</li>
+                                                                <li>limit any of our or your liabilities in any way that is not permitted under applicable law; or</li>
+                                                                <li>exclude any of our or your liabilities that may not be excluded under applicable law.</li>
+                                                            </ul>
+
+                                                            <p>The limitations and prohibitions of liability set in this Section and elsewhere in this disclaimer: (a) are subject to the preceding paragraph; and (b) govern all liabilities arising under the disclaimer, including liabilities arising in contract, in tort and for breach of statutory duty.</p>
+
+                                                            <p>As long as the website and the information and services on the website are provided free of charge, we will not be liable for any loss or damage of any nature.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+
+                                                            <i style="font-size: 9pt"><b>Disclaimer:</b> Use of ReacHelp is entirely at your own risk. The providers of ReacHelp make no warranties about the accuracy or correctness of the information provided and will not be responsible for any issues or problems that may come up by using it. ReacHelp is meant purely as a social service to help connect those who need help with those who are willing to give it. Your acceptance of these terms is mandatory to use ReacHelp.</i>
+                                                            <div>
+                                                                <span>
+                                                                    <input type="checkbox" class="flat" id="chkDisclaimer" runat="server" />
+                                                                    <i>I Accept.</i></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <asp:Button CssClass="btn btn-success btn-block" ID="signupbtn" runat="server" OnClick="signup_Click" Text="SignUp" ValidationGroup="signupgp" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <asp:Label ID="sinupvalidate" runat="server" Text=""></asp:Label>
+                                                    </div>
+                                                </div>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </asp:Panel>
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="forgotpass">
+                                    <asp:Panel ID="Panel3" runat="server" DefaultButton="forgotbtn">
+                                        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                            <ContentTemplate>
+                                                <div class="form-group" style="margin-bottom: 1px">
+                                                    <label for="fsmobileno">Email / Cell no.</label>
+                                                    <asp:TextBox ID="fsmobileno" runat="server" CssClass="form-control" AutoPostBack="True" OnDataBinding="fpass_check_mobile_Changed" OnTextChanged="fpass_check_mobile_Changed" ValidationGroup="signupgp"></asp:TextBox>
+                                                    <asp:Label ID="fpassmobilevalidate" runat="server" Text=""></asp:Label>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server"
+                                                        ControlToValidate="fsmobileno" ErrorMessage="Email/Cell No. is Required"
+                                                        Font-Bold="false" Font-Size="small" ForeColor="#FF3300" ValidationGroup="forgotpassgp"></asp:RequiredFieldValidator>
+                                                </div>
+                                                <div class="form-group">
+                                                    <asp:Button CssClass="btn btn-success btn-block" ID="forgotbtn" runat="server" OnClick="forgotPass_Click" Text="Send OTP" ValidationGroup="forgotpassgp" />
+                                                </div>
+                                                <asp:Label ID="forgotPassValidate" runat="server" Text=""></asp:Label>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </asp:Panel>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="content">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+
+        <!-- //footer -->
+        <div class="footer">
+            <div class="container">
+                <div class="w3_footer_grids">
+                    <%--<div class="col-md-3 w3_footer_grid">
+                        <h3>Contact</h3>
+
+                        <ul class="address">
+                            <li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>1234k Avenue, 4th block, <span>New York City.</span></li>
+                            <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">info@example.com</a></li>
+                            <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
+                        </ul>
+                    </div>--%>
+                    <div class="col-md-3 w3_footer_grid">
+                        <%--<h3>Information</h3>--%>
+                        <ul class="info">
+                            <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="about.aspx">About Us</a></li>
+                            <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="contactus.aspx">Contact Us</a></li>
+                            <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="feedback.aspx">Feedback</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 w3_footer_grid">
+                        <%--<h3>Support Us</h3>--%>
+                        <ul class="info">
+                            <li><i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                <button type="button" id="btnDonate" onclick="toggleDonateWindow()">Donate</button></li>
+                            <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="privacy.aspx">Privacy Policy</a></li>
+                        </ul>
+                        <%--<h3>Category</h3>
+                        <ul class="info">
+                            <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="groceries.html">Groceries</a></li>
+                            <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="household.html">Household</a></li>
+                            <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="personalcare.html">Personal Care</a></li>
+                            <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="packagedfoods.html">Packaged Foods</a></li>
+                            <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="beverages.html">Beverages</a></li>
+                        </ul>--%>
+                    </div>
+                    <div class="col-md-6 w3_footer_grid">
+                        <div id="donation" style="display: none;">
+                            <h4>Donation Amount (USD)</h4>
+                            <span class="donation-amt fixed" data-amt="10">$ 10</span>
+                            <span class="donation-amt fixed" data-amt="100">$ 100</span>
+                            <span class="donation-amt fixed" data-amt="200">$ 200</span>
+                            <span class="donation-amt fixed" data-amt="300">$ 300</span>
+                            <span class="donation-amt fixed" data-amt="500">$ 500</span>
+                            <span class="donation-amt fixed" data-amt="1000">$ 1000</span>
+                            <span class="donation-amt fixed" data-amt="2000">$ 2000</span>
+                            <span class="donation-amt fixed" data-amt="3000">$ 3000</span>
+                            <div class="donation-amt other">
+                                <h5>Other</h5>
+                                <input class="form-control" type="number" min="10" id="donationOtherAmount" />
+                            </div>
+                            <button class="btn btn-sm btn-primary btn-block" type="button" onclick="makeDonation()">Donate by Credit/Debit card</button>
+                        </div>
+
+                        <%--<h3>Profile</h3>
+                        <ul class="info">
+                            <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="products.html">Store</a></li>
+                            <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="checkout.html">My Cart</a></li>
+                            <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="login.html">Login</a></li>
+                            <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="registered.html">Create Account</a></li>
+                        </ul>--%>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="footer-copy">
+
+                <div class="container">
+                    <%--<p>© 2017 Super Market. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>--%>
+                    <p>© 2019 APCOGSYS. All rights reserved </p>
+                    <%-- | Design by <a href="http://w3layouts.com/">W3layouts</a> --%>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer-botm">
+            <div class="container">
+                <div class="w3layouts-foot">
+                    <ul>
+                        <%--<li><a href="#" class="w3_agile_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#" class="agile_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#" class="w3_agile_dribble"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+                        <li><a href="#" class="w3_agile_vimeo"><i class="fa fa-vimeo" aria-hidden="true"></i></a></li>--%>
+                    </ul>
+                </div>
+                <div class="payment-w3ls">
+                    <%--<img src="images/card.png" alt=" " class="img-responsive">--%>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- //footer -->
+        <div class="loader-cont">
+            <div class="loader"></div>
+            <span>Loading...</span>
+        </div>
+
+    </form>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- iCheck -->
+    <script src="main/vendors/iCheck/icheck.min.js"></script>
+    <%--<script src="lib/spzoom/jquery.spzoom.js"></script>--%>
+    <script src="main/vendors/sweet-alerts/sweetalert.min.js"></script>
+    <script src="main/js/common.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_GGLgviaKglrrY0qRxi6eyJDjgdG12Y4&callback=initMap"
+		async defer></script>
+
+    <!-- intlTellInput -->
+    <%--<script src="../lib/intl-codes/js/intlTelInput-jquery.min.js"></script>--%>
+    <script src="lib/intl-codes/js/country_codes.js"></script>
+
+    <!-- top-header and slider -->
+    <!-- here stars scrolling icon -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+				};
+			*/
+
+            $('input.flat').iCheck({
+                checkboxClass: 'icheckbox_flat-green'
+            });
+
+            $('input.icheck-radio').iCheck({
+                radioClass: 'iradio_flat-green'
+            });
+
+            $().UItoTop({ easingType: 'easeOutQuart' });
+
+        });
+    </script>
+    <!-- //here ends scrolling icon -->
+    <script src="lib/w3layout/js/minicart.min.js"></script>
+    <script>
+        // Mini Cart
+        paypal.minicart.render({
+            action: '#'
+        });
+
+        if (~window.location.search.indexOf('reset=true')) {
+            paypal.minicart.reset();
+        }
+    </script>
+    <!-- main slider-banner -->
+    <script src="lib/w3layout/js/skdslider.min.js"></script>
+    <link href="lib/w3layout/css/skdslider.css" rel="stylesheet" />
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+
+            //$('[data-spzoom]').spzoom();
+
+            jQuery('#demo1').skdslider({ 'delay': 5000, 'animationSpeed': 2000, 'showNextPrev': true, 'showPlayButton': true, 'autoSlide': true, 'animationType': 'fading' });
+
+            jQuery('#responsive').change(function () {
+                $('#responsive_wrapper').width(jQuery(this).val());
+            });
+
+            window.onscroll = function () {
+                var navbar = $(".navigation-agileits")[0];
+                var sticky = navbar.offsetTop;
+                //console.log("Y Offset: ", window.pageYOffset, sticky);
+                if (window.pageYOffset > sticky) {
+                    navbar.classList.add("sticky")
+                } else {
+                    navbar.classList.remove("sticky");
+                }
+            };
+
+        });
+    </script>
+    <!-- //main slider-banner -->
+
+    <script>
+
+        //$.appPost("./main/index.aspx/ListCategoryForUser", { languageId: '1' }).then(function (resp) {
+        $.appPost("./index.aspx/listCategoryAndSubCategory", null).then(function (resp) {
+            console.log("Categories AND SubCategories: ", resp);
+            $('#menuCategories').empty();
+            $('<h6>').text("All Category").appendTo('#menuCategories');
+            var categories = resp.d;
+            categories.push({
+                categoryId: 0,
+                categoryName: "All"
+            });
+            if (categories.length > 0) {
+                categories.forEach(function (ele) {
+                    var subCategories = ele.subCategoryList;
+                    /*
+                    <li class="dropdown-submenu">
+                        <a class="test" tabindex="-1" href="#">New dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+                            <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+                        </ul>
+                    </li>
+                    */
+                    var li = $('<li>').appendTo('#menuCategories');
+
+                    var catLink = $('<a>').addClass('test').attr({ tabindex: '-1', href: '#' }).html(ele.categoryName).appendTo(li);
+
+                    if (ele.categoryName != "All") {
+                        li.addClass('dropdown-submenu')
+                        $('<span>').addClass('caret').appendTo(catLink);
+
+                        var subCatMenu = $('<ul>').addClass('dropdown-menu').appendTo(li);
+                        subCategories.forEach(function (subCat) {
+                            var subLi = $('<li>').appendTo(subCatMenu);
+                            $('<a>').attr({ tabindex: '-1', href: '#', 'data-catid': ele.categoryId, 'data-subcat': subCat.subCategoryId }).text(subCat.subCategoryName).on('click', function () {
+                                var categoryId = $(this).attr('data-catid')
+                                subCategoryId = $(this).attr('data-subcat');
+                                $('#selectedCategoryLabel').text($(this).text());
+                                //$.appPost("./index.aspx/getActiveOffers", { categoryId: categoryId, startValue: 0, noOfRows: 10 }).then(function (resp) {
+                                $.appPost("./index.aspx/activeOffersSubCategory", { subCategoryId: subCategoryId, startValue: 0, noOfRows: 10 }).then(function (resp) {
+                                    console.log("HOME Get Active Offers: ", resp);
+                                    var offers = resp.d;
+                                    $('#newOffers').empty();
+                                    if (offers.length > 0) {
+                                        offers.forEach(function (ele) {
+                                            createProductCard(ele);
+                                        });
+                                    }
+                                    else {
+                                        $('<h3>').text("-- No Offers Available --").css({ color: '#9a9a9a', 'text-transform': 'none' }).appendTo('#newOffers');
+                                    }
+                                })
+
+                                $('html, body').animate({
+                                    scrollTop: $('#selectedCategoryLabel').offset().top - 150
+                                }, 2000);
+
+                            }).appendTo(subLi);
+                        });
+                    }
+                    else {
+                        catLink.on('click', function () {
+                            $.appPost("./index.aspx/getActiveOffers", { categoryId: 0, startValue: 0, noOfRows: 10 }).then(function (resp) {
+                                //console.log("Index Get Active Offers: ", resp);
+                                var offers = resp.d;
+                                $('#newOffers').empty();
+                                if (offers.length > 0) {
+                                    offers.forEach(function (ele) {
+                                        createProductCard(ele);
+                                    });
+
+                                    if (getUrlParam(window.location.href, 'oid') != null) {
+                                        preLoadRequest();
+                                    }
+                                }
+                                else {
+                                    $('<h3>').text("-- No Offers Available --").css({ color: '#9a9a9a', 'text-transform': 'none' }).appendTo('#newOffers');
+                                }
+
+                                $('html, body').animate({
+                                    scrollTop: $('#selectedCategoryLabel').offset().top - 150
+                                }, 1000);
+                            })
+                        })
+                    }
+
+                    /*
+                    var li = $('<li>').appendTo('#menuCategories');
+                    $('<a>').attr({ href: '#', 'data-catid': ele.categoryId }).text(ele.categoryName).on('click', function () {
+                        var categoryId = $(this).attr('data-catid');
+                        $('#selectedCategoryLabel').text($(this).text());                        
+                        $.appPost("./index.aspx/getActiveOffers", { categoryId: categoryId, startValue: 0, noOfRows: 10 }).then(function (resp) {
+                            console.log("HOME Get Active Offers: ", resp);
+                            var offers = resp.d;
+                            $('#newOffers').empty();
+                            if (offers.length > 0) {
+                                offers.forEach(function (ele) {
+                                    createProductCard(ele);
+                                });
+                            }
+                            else {
+                                $('<h3>').text("-- No Offers Available --").css({ color: '#9a9a9a', 'text-transform': 'none' }).appendTo('#newOffers');
+                            }
+                        })
+                    }).appendTo(li);*/
+                });
+
+                $('.dropdown-submenu a.test').on("click", function (e) {
+                    $('.multi-column-dropdown').find('.dropdown-menu').hide();
+                    $(this).next('ul').toggle();
+                    e.stopPropagation();
+                    e.preventDefault();
+                });
+            }
+        });
+
+        $('input.flat').iCheck({
+            checkboxClass: 'icheckbox_flat-green'
+        });
+
+        $('#register').on('click', function () {
+            $("#loginorsignup").modal("show");
+            $('a[href$="#signup"]').click();
+        });
+
+        $("#lmodalid").click(function () {
+            if ($('#setmodalsize').hasClass("modal-lg")) {
+                $('#setmodalsize').removeClass("modal-lg").addClass("modal-sm");
+            }
+            $("#loginorsignup").modal("show");
+            $('a[href$="#login"]').click();
+        });
+        $('a[href="#login"]').click(function () {
+            if ($('#setmodalsize').hasClass("modal-lg")) {
+                $('#setmodalsize').removeClass("modal-lg").addClass("modal-sm");
+            }
+            $("#modaltitle").html("LOGIN");
+        });
+        $('a[href="#signup"]').click(function () {
+            if ($('#setmodalsize').hasClass("modal-sm")) {
+                $('#setmodalsize').removeClass("modal-sm").addClass("modal-lg");
+            }
+            $("#modaltitle").html("SIGNUP");
+        });
+        $('a[href="#forgotpass"]').click(function () {
+            $('a[href="#login"]').parent().removeClass("active");
+            $("#modaltitle").html("Forgot Password?");
+        });
+
+        $('#btnRequestHelp').on('click', function () {
+            $('html, body').animate({
+                scrollTop: $('.newproducts-w3agile').position().top
+            }, 2000);
+            //var top = $('.newproducts-w3agile').position().top;
+            //window.scrollTo(0, top);
+
+            /*if (sessionStorage.getItem('userId') != null) {
+                window.location = './main/requestHelp.aspx';
+            }
+            else {
+                $("#loginorsignup").modal("show");
+                $('a[href$="#login"]').click();
+            }*/
+        });
+
+        $('#btnOfferHelp').on('click', function () {
+            if (sessionStorage.getItem('userId') != null) {
+                window.location = './main/offerHelp.aspx';
+            }
+            else {
+                $("#loginorsignup").modal("show");
+                $('a[href$="#signup"]').click();
+            }
+        });
+
+        function createProductCard(ele) {
+            var cont1 = $('<div>').addClass('col-md-3 top_brand_left-1').appendTo('#newOffers');
+            var cont2 = $('<div>').addClass('hover14 column').appendTo(cont1);
+            var cont3 = $('<div>').addClass('agile_top_brand_left_grid').appendTo(cont2);
+            //var cont4 = $('<div>').addClass('agile_top_brand_left_grid_pos').appendTo(cont3);
+            //$('<img>').attr({ src: 'lib/w3layout/images/offer.png', alt: "" }).addClass('img-responsive').appendTo(cont4);
+            var cont5 = $('<div>').addClass('agile_top_brand_left_grid1').appendTo(cont3);
+            var figure = $('<div>').appendTo(cont5);
+            var cont6 = $('<div>').addClass('snipcart-item block').appendTo(figure);
+            var cont7 = $('<div>').addClass('snipcart-thumb').appendTo(cont6);
+            var prodAnchor = $('<a>').attr({ href: '#' }).appendTo(cont7);
+            var mainImg = $('<img>').attr({ title: "", alt: "", src: "https://via.placeholder.com/500x400.png?text=No+Image+Available" }).css({ height: '150px', width: '100%', 'object-fit': 'cover' }).appendTo(prodAnchor);
+            console.info("IMAGE PATH: ", ele.imagePath);
+            if (ele.imagePath == null) {
+                console.log(" ./Uploads/" + ele.offerSubCategoryName.toLowerCase() + ".jpg");
+                //mainImg.attr({ src: "./Uploads/" + ele.offerSubCategoryName.toLowerCase() + ".jpg" });         
+            }
+            else {
+                var imgUrl = "./Uploads/" + (ele.imagePath.indexOf(',') > -1 ? ele.imagePath.split(',')[0] : ele.imagePath);
+                checkImage(imgUrl, function () { mainImg.src = imgUrl; }, function () { console.error('Image Not Found!') });
+
+            }
+
+            $('<p>').text(ele.offerSubCategoryName).appendTo(cont7);
+            /*var ratingDiv = $('<div>').addClass('stars').appendTo(cont7);
+            for (var r = 0; r < 5; r++) {
+                var start = $('<i>').addClass('fa fa-star').attr({ 'aria-hidden': "true" }).appendTo(ratingDiv);
+                if (r == 4)
+                    start.addClass('blue-star');
+                else
+                    start.addClass('gray-star');
+            }*/
+            $('<h4>').text("Qty: " + ele.offerQuantity + " " + ele.offerUnit).appendTo(cont7);
+            var cont8 = $('<div>').addClass('snipcart-details top_brand_home_details').appendTo(cont6);
+            $('<button>').attr({ type: "button" }).addClass('btn btn-primary btn-md').text('Request').appendTo(cont8);
+        }
+
+        $('#scountry').change(function () {
+            var country = $(this).val();
+            var countryName = $(this).find('option:selected').text();
+
+            console.info("Selected Country: ", countryName);
+
+            var code = countryCodes.filter(function (item) {
+                if (item.country.trim().toLowerCase() == countryName.trim().toLowerCase()) {
+                    console.log(item.country, item.code, countryName);
+                    return item.code;
+                }
+            });
+            console.info("Country Name : ", countryName, " ; Code: ", code[0]);
+        });
+
+
+        //$('#loginorsignup').on('shown.bs.modal', function () {
+        //    $('#sphoneno').intlTelInput({
+        //        //initialCountry: "in",
+        //        separateDialCode: false,
+        //        nationalMode: false,
+        //        formatOnDisplay: true,
+        //    });
+        //});      
+
+
+        function toggleDonateWindow() {
+            //alert("Button Donate Clicked");
+            $('#donation').slideToggle();
+        }
+
+        $('.donation-amt').on('click', function () {
+            $(this).addClass('active').siblings('.donation-amt').removeClass('active');
+        })
+
+        function makeDonation() {
+            if ($('.donation-amt.active').attr('class').indexOf('fixed') > -1) {
+                alert($('.donation-amt.active').data('amt'));
+            }
+            else if ($('.donation-amt.active').attr('class').indexOf('other') > -1) {
+                alert($('.donation-amt.active').find('input').val());
+            }
+        }
+
+    </script>
+
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+    </asp:ContentPlaceHolder>
+</body>
+</html>

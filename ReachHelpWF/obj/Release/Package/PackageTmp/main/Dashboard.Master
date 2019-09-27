@@ -1,0 +1,524 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Dashboard.master.cs" Inherits="ReachHelpWF.main.Dashboard" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ReacHelp - Dashboard</title>
+    <!-- Bootstrap -->
+    <link href="./vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="./vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- NProgress -->
+    <link href="./vendors/nprogress/nprogress.css" rel="stylesheet" />
+    <!-- iCheck -->
+    <link href="./vendors/iCheck/skins/flat/green.css" rel="stylesheet" />
+
+    <!-- bootstrap-progressbar -->
+    <link href="./vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" />
+    <!-- JQVMap -->
+    <link href="./vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
+    <!-- bootstrap-daterangepicker -->
+    <link href="./vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <!-- Switchery -->
+    <link href="./vendors/switchery/dist/switchery.min.css" rel="stylesheet" />
+
+    <!-- Animate -->
+    <link href="../lib/animate/animate.min.css" rel="stylesheet" />
+
+    <!-- Select2 -->
+    <link href="vendors/select2/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Datatables -->
+    <link href="./vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet" />
+
+
+    <!-- intlTellInput -->
+    <link href="../lib/intl-codes/css/intlTelInput.min.css" rel="stylesheet" />
+    <link href="vendors/rating/rating_simple.css" rel="stylesheet" />
+
+    <!-- Custom Theme Style -->
+
+    <link href="./css/custom.css" rel="stylesheet" />
+    <style>
+        .btn-transparent {
+            background-color:transparent;
+        }
+
+            .btn-transparent:hover,.btn-transparent:focus {
+                color:#00BCD4;
+            }
+
+        .chatContainer {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+            height: 400px;
+            width: 300px;
+            display: block;
+            background: #e3e3e3;
+            box-sizing: border-box;
+            box-shadow: 0 2px 3px 1px rgba(0,0,0,0.5);
+            border-radius: 5px 5px 0 0;
+            transition: height .5s ease-in-out;
+        }
+
+            .chatContainer.gone {
+                height: 30px;
+            }
+
+
+            .chatContainer .header {
+                padding: 5px;
+                background: #013f7d;
+                height: 30px;
+                width: 100%;
+                border-radius: 5px 5px 0 0;
+                color: #fff;
+            }
+
+                .chatContainer .header h4 {
+                    display: inline;
+                }
+
+                .chatContainer .header span {
+                    padding: 5px 10px;
+                }
+
+            .chatContainer .chat-content {
+                height: calc(100% - 70px);
+                width: 100%;
+                overflow-y: auto;
+                background-color: #fff;
+                
+                padding-top:10px;
+            }
+
+        .chat-content .msg {
+            display: block;
+            max-width: calc(100% - 40px);
+            color: #403f3f;
+            border-radius: 4px;
+            padding: 5px;
+            margin: 5px 10px;
+        }
+
+            .chat-content .msg.msg-me {
+                float: right;
+                background: #84c186;
+                clear: both;
+            }
+
+                .chat-content .msg.msg-me::before {
+                    content: '';
+                    display: block;
+                    height: 10px;
+                    width: 10px;
+                    background-color: #84c186;
+                    transform: skewX(-45deg);
+                    float: right;
+                    margin-right: -8px;
+                    margin-top: -5px;
+                }
+
+
+            .chat-content .msg.msg-other {
+                float: left;
+                background: #cef4f9;
+                clear: both;
+            }
+
+                .chat-content .msg.msg-other::before {
+                    content: '';
+                    display: block;
+                    height: 10px;
+                    width: 10px;
+                    background-color: #cef4f9;
+                    transform: skewX(45deg);
+                    float: left;
+                    margin-left: -9px;
+                    margin-top: -5px;
+                }
+
+        .chat-content::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            background-color: #F5F5F5;
+        }
+
+        .chat-content::-webkit-scrollbar {
+            width: 3px;
+            background-color: #F5F5F5;
+        }
+
+        .chat-content::-webkit-scrollbar-thumb {
+            background-color: #000000;
+        }
+
+
+        #userMessage {
+            display: inline-block;
+            width: calc(100% - 40px);
+            height: 30px;
+            outline: none;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 2px;
+            padding: 10px;
+        }
+
+        #sendMessage {
+            display: inline-block;
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            background: #4CAF50;
+            border: 1px solid #4bb34f;
+            color: #fff;
+            box-sizing: border-box;
+        }
+
+
+
+        .chatContainer .footer {
+            padding: 5px;
+            /*background: #d2d1d1;*/
+            height: 40px;
+            width: 100%;
+        }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <script>
+        sessionStorage.setItem('userId', '<%=Session["UserId"].ToString()%>');
+        sessionStorage.setItem('userName', '<%=Session["UserName"].ToString()%>');
+        sessionStorage.setItem('userRole', '<%=Session["UserRole"].ToString()%>');
+    </script>
+</head>
+<body class="nav-md">
+    <form id="form1" runat="server">
+        <div>
+            <div class="container body">
+                <div class="main_container">
+                    <div class="col-md-3 left_col menu_fixed">
+                        <div class="left_col scroll-view">
+                            <div class="navbar nav_title" style="border: 0;">
+                                <a href="/index" class="site_title">
+                                    <img src="images/reachHelpLogo.png" /><%--<i class="fa fa-paw"></i>--%><span>ReacHelp</span><%--<small class="beta-lable">Beta</small>--%></a>
+
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            <!-- menu profile quick info -->
+                            <div class="profile clearfix">
+                                <div class="profile_pic">
+                                    <img src="images/user_icon.png" alt="..." class="img-circle profile_img">
+                                </div>
+                                <div class="profile_info">
+                                    <span><span class="trn">Welcome</span>,</span>
+                                    <h2 id="userAccountName1" runat="server"></h2>
+                                </div>
+                            </div>
+                            <!-- /menu profile quick info -->
+
+                            <br />
+
+                            <!-- sidebar menu -->
+                            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                                <div class="menu_section">
+                                    <h3>General</h3>
+                                    <ul class="nav side-menu">
+                                        <%if (Session["UserRole"].ToString() == "User")
+                                          {%>
+                                        <%if (Session["AccountStatus"].ToString() == "Active")
+                                          {%>
+                                        <!--<li><a href="requestHelp" lang="en"><i class="fa fa-mail-reply"></i><span class="trn">I Need</span></a></li>
+                                        <li><a href="offerHelp" lang="en"><i class="fa fa-share"></i><span class="trn">I Offer</span></a></li>-->
+                                        <li><a href="myRequests" lang="en"><i class="fa fa-chevron-circle-left"></i><span class="trn">Needs</span></a></li>
+                                        <li><a href="myOffers" lang="en"><i class="fa fa-chevron-circle-right"></i><span class="trn">Offers</span></a></li>
+                                        <%} %>
+                                        <%else if (Session["AccountStatus"].ToString() == "New")
+                                          {%>
+                                        <li><a href="userProfile" lang="en"><i class="fa fa-mail-reply"></i><span class="trn">My Profile</span></a></li>
+                                        <%} %>
+
+                                        <%} %>
+                                        <%else if (Session["UserRole"].ToString() == "SysAdmin")
+                                          {%>
+                                        <li><a href="adminDash" lang="en"><i class="fa fa-home"></i><span class="trn">Dashboard</span></a></li>
+                                        <li><a href="allUsers" lang="en"><i class="fa fa-users"></i><span class="trn">All Users</span></a></li>
+                                        <li><a href="categoriesPage" lang="en"><i class="fa fa-list"></i><span class="trn">Categories</span></a></li>
+                                        <li><a href="subCategoriesPage" lang="en"><i class="fa fa-list"></i><span class="trn">Sub-Categories</span></a></li>
+                                        <li><a href="ConfigUnits" lang="en"><i class="fa fa-gears"></i>Unit Configuration</a></li>
+                                        <!--<li><a href="smsConfiguration" lang="en"><i class="fa fa-home"></i>SMS Configuration</a></li>-->
+                                        <%} %>
+                                        <%else if (Session["UserRole"].ToString() == "Monitor")
+                                          {%>
+                                        <li><a href="#" lang="en"><i class="fa fa-home"></i><span class="trn">Regions</span></a></li>
+                                        <li><a href="reportsMonitor" lang="en"><i class="fa fa-home"></i><span class="trn">Reports</span></a></li>
+                                        <li><a href="manageLanguage" lang="en"><i class="fa fa-language"></i><span class="trn">Manage Languages</span></a></li>
+                                        <li><a href="InfoLinks" lang="en"><i class="fa fa-link"></i><span class="trn">Info Links</span></a></li>
+                                        <%} %>
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <!-- /sidebar menu -->
+
+                            <!-- /menu footer buttons -->
+                            <div class="sidebar-footer hidden-small">
+                                <a data-toggle="tooltip" data-placement="top" title="Settings">
+                                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                </a>
+                                <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                                    <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                                </a>
+                                <a data-toggle="tooltip" data-placement="top" title="Lock">
+                                    <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                                </a>
+                                <a data-toggle="tooltip" data-placement="top" title="Logout" href="" runat="server" onserverclick="Logout_Click">
+                                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                                </a>
+                            </div>
+                            <!-- /menu footer buttons -->
+                        </div>
+                    </div>
+
+                    <!-- top navigation -->
+                    <div class="top_nav">
+                        <div class="nav_menu">
+                            <nav>
+                                <div class="nav toggle">
+                                    <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                                </div>
+
+                                <ul class="nav navbar-nav navbar-right">
+
+                                    <li class="">
+                                        <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            <img src="images/user_icon.png" alt="" /><span id="userAccountName2" runat="server"></span>
+
+                                            <span class=" fa fa-angle-down"></span>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                            <li><a href="userProfile" lang="en">Profile</a></li>
+                                            <!--<li>
+                                                <a href="javascript:;">
+                                                    <span class="badge bg-red pull-right">50%</span>
+                                                    <span>Settings</span>
+                                                </a>
+                                            </li>-->
+                                            <!--<li><a href="javascript:;">Help</a></li>-->
+                                            <%--<li><a href="" runat="server" onserverclick="Logout_Click"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>--%>
+                                        </ul>
+                                    </li>
+
+                                    <!-- <li role="presentation" class="dropdown">
+                                        <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="fa fa-language"></i>                                           
+                                        </a>
+                                        <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                                            <li onclick="changeLang('en'); return false;" class="trn">English</li>
+                                            <li onclick="changeLang('ml'); return false;" class="trn">Malayalam</li>
+                                            <li onclick="changeLang('hi'); return false;" class="trn">Hindi</li>
+                                            <li onclick="changeLang('kn'); return false;" class="trn">Kannada</li>
+                                            <li onclick="changeLang('bn'); return false;" class="trn">Bengali</li>
+                                        </ul>
+                                    </li> -->
+                                    <%if (Session["UserRole"].ToString() == "User")
+                                      {%>
+                                    <%--<li role="presentation" class="dropdown">
+                                        <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                            <span><span style="font-size: 12pt;" id="contributionCount" runat="server"></span><i class="fa fa-thumbs-up" style="color: orange;"></i></span>
+                                        </a>
+                                    </li>--%>
+                                    <% } %>
+                                    <li role="presentation" class="dropdown">
+                                        <a href="" class="" runat="server" onserverclick="Logout_Click">
+                                            <span><i class="fa fa-sign-out" style="color: crimson;"></i>Logout</span>
+                                        </a>
+                                    </li>
+                                    <li role="presentation" class="dropdown">
+                                        <a id="homelink" href="../index.aspx" class="">
+                                            <span><i class="fa fa-home"></i>Home</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- /top navigation -->
+
+                    <!-- page content -->
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+
+
+                    <div class="chatContainer gone">
+                        <div class="header">
+                            <span id="chatWindowToggle" onclick="toggleChatWindow()"><i class="fa fa-chevron-up"></i></span>
+                            <h4>Chat</h4>
+                            <button type="button" id="refreshChat" class="btn btn-xs btn-transparent pull-right"><i class="fa fa-refresh"></i></button>
+                            <small style="color: black;display: block;margin-top: 6px;"><span style="color:crimson;font-weight:bold;">Note: </span>Please select an Offer/Request for chating.</small>
+                        </div>
+                        <div class="chat-content">
+                            <%--<div class="msg msg-me">
+                                <span>This is my message</span>
+                            </div>
+
+                            <div class="msg msg-other">
+                                <span>This is message from others</span>
+                            </div>--%>
+
+                        </div>
+                        <div class="footer">
+                            <input type="text" id="userMessage" />
+                            <button type="button" id="sendMessage"><i class="fa fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- /page content -->
+
+                    <!-- footer content -->
+                    <footer>
+                        <div class="pull-right">
+                            ReacHelp by <a href="http://www.apcogsys.com">Applied Cognition Systems Pvt. Ltd.</a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </footer>
+                    <!-- /footer content -->
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+    <!-- jQuery -->
+    <script src="./vendors/jquery/dist/jquery.min.js"></script>
+
+    <!-- intlTellInput -->
+    <script src="../lib/intl-codes/js/intlTelInput-jquery.min.js"></script>
+
+    <!-- Jquery Translate -->
+    <script src="./vendors/jquery-translate/jquery.translate.js"></script>
+    <script src="./vendors/jquery-translate/lang-dict.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="./vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="./vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="./vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="./vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="./vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="./vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="./vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="./vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="./vendors/Flot/jquery.flot.js"></script>
+    <script src="./vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="./vendors/Flot/jquery.flot.time.js"></script>
+    <script src="./vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="./vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="./vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="./vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="./vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="./vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="./vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="./vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="./vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="./vendors/moment/min/moment.min.js"></script>
+    <script src="./vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <!-- Switchery -->
+    <script src="./vendors/switchery/dist/switchery.min.js"></script>
+    <!-- Select2 -->
+    <script src="./vendors/select2/dist/js/select2.full.min.js"></script>
+
+    <!-- Datatable -->
+    <script src="./vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="./vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="./vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+
+
+    <!-- Sweet Alerts -->
+    <script src="./vendors/sweet-alerts/sweetalert.min.js"></script>
+
+    <!-- Moment -->
+    <script src="./vendors/moment/min/moment-with-locales.min.js"></script>
+    <script src="vendors/rating/rating_simple.js"></script>
+    <script src="../lib/intl-codes/js/country_codes.js"></script>
+    <script src="./js/common.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_GGLgviaKglrrY0qRxi6eyJDjgdG12Y4&callback=initMap&libraries=visualization"
+		async defer></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="./js/custom.js"></script>
+    <%--<script src="./js/custom.min.js"></script>--%>
+
+
+
+    <script>
+
+        var translator = $('body').translate({ lang: "en", t: dict }); //use English
+        translator.lang(sessionStorage.getItem('langCode'));
+
+        (function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            $('.copy-addr').on('click', function (ev) {
+                var addressText = $(ev.target).siblings('textarea').val();
+                $(ev.target).siblings('textarea').select();
+                document.execCommand("copy");
+                window.open('https://www.google.com/maps/search/' + addressText + '/', '_blank');
+            });
+        })()
+
+        function changeLang(lngId) {
+            translator.lang(lngId);
+            sessionStorage.setItem('langCode', lngId);
+        }
+
+        function toggleChatWindow() {
+            $('.chatContainer').toggleClass('gone');
+            $('#chatWindowToggle i').toggleClass('fa-chevron-down fa-chevron-up');
+
+            console.log($('.chat-content div.msg').last().offset().top);
+            $('.chat-content').animate({ scrollTop: $('.chat-content div.msg').last().offset().top + "px" }, 1000);
+        }
+
+        //$('#userMessage').on('keypress', function (e) {
+        //    var message = $(this).val();
+        //    if (e.which == 13) {
+        //        if (message != "") {
+        //            createChatMessage(message, "me");
+        //            $(this).val("");
+        //        }
+        //    }
+        //});        
+
+        function createChatMessage(message, from, dateTime) {
+            var msgClass = from == "me" ? "msg-me" : "msg-other";
+            var msgDiv = $('<div>').addClass('msg ' + msgClass).appendTo('.chat-content');
+            $('<span>').text(message).appendTo(msgDiv);            
+            $('<small>').css({ display: 'block', color: '#a94442' }).text(dateTime).appendTo(msgDiv);
+            //$('.chat-content').animate({ scrollTop: $('.chat-content div.msg:last').offset().top }, 1000);
+        }
+
+    </script>
+    <asp:ContentPlaceHolder ID="scriptIncludesPlaceHolder" runat="server">
+    </asp:ContentPlaceHolder>
+</body>
+</html>
